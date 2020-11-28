@@ -26,6 +26,12 @@
             <TextBlock Margin="3"  Text="Controls"/>
             <Button Margin="3,5" HorizontalAlignment="Left" Click="b1Click">Subdivide</Button>
             <Button Margin="3,5" HorizontalAlignment="Left" Click="b2Click">Clear</Button>
+            <Slider Width="100" Value="0.5" Orientation="Horizontal" ValueChanged="slider1change" HorizontalAlignment="Left"
+       IsSnapToTickEnabled="True"  Maximum="1" TickPlacement="BottomRight"
+       AutoToolTipPlacement="BottomRight" TickFrequency="0.05"
+       AutoToolTipPrecision="2" IsDirectionReversed="False"
+       IsMoveToPointEnabled="False"/>
+            
         </StackPanel>
         <Grid ClipToBounds="True">
             <k:GraphPaper x:Name="Paper"></k:GraphPaper>

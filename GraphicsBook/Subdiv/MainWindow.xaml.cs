@@ -15,6 +15,7 @@ namespace GraphicsBook
         Polygon myPolygon = new Polygon();
         Polygon mySubdivPolygon = new Polygon();
         bool isSubdivided = false;
+        double alpha = 0.5;
         GraphPaper gp = null;   
 
         // Are we ready for interactions like slider-changes to alter the 
@@ -90,15 +91,29 @@ namespace GraphicsBook
             {
                 int lasti = (i + (n - 1)) % n ; // index of previous point
                 int nexti = (i + 1) % n; // index of next point.
-                double x = (1.0f / 3.0f) * myPolygon.Points[lasti].X + (2.0f / 3.0f) * myPolygon.Points[i].X;
-                double y = (1.0f / 3.0f) * myPolygon.Points[lasti].Y + (2.0f / 3.0f) * myPolygon.Points[i].Y;
+
+                double x = (myPolygon.Points[lasti].X + myPolygon.Points[i].X) / 2;
+                double y = (myPolygon.Points[lasti].Y + myPolygon.Points[i].Y) / 2;
                 mySubdivPolygon.Points.Add(new Point(x, y));
-            
-                x = (1.0f / 3.0f) * myPolygon.Points[nexti].X + (2.0f / 3.0f) * myPolygon.Points[i].X;
-                y = (1.0f / 3.0f) * myPolygon.Points[nexti].Y + (2.0f / 3.0f) * myPolygon.Points[i].Y;
+                Debug.Print(x.ToString() + " " + y.ToString());
+
+                x = alpha / 2 * myPolygon.Points[lasti].X + alpha / 2 * myPolygon.Points[nexti].X + (1 - alpha) * myPolygon.Points[i].X;
+                y = alpha / 2 * myPolygon.Points[lasti].Y + alpha / 2 * myPolygon.Points[nexti].Y + (1 - alpha) * myPolygon.Points[i].Y;
                 mySubdivPolygon.Points.Add(new Point(x, y));
+                Debug.Print(x.ToString() + " " + y.ToString());
             }
             e.Handled = true; // don't propagate the click any further
+        }
+
+        void slider1change(object sender, RoutedPropertyChangedEventArgs<double> e)
+        {
+            Debug.Print("Slider changed, ready = " + ready + ", and val = " + e.NewValue + ".\n");
+            e.Handled = true;
+            // Be sure to not respond to slider-moves until all objects have been constructed. 
+            if (ready)
+            {
+                alpha = e.NewValue;
+            }
         }
 
         // Clear button
