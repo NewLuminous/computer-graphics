@@ -24,6 +24,7 @@
 
         <StackPanel DockPanel.Dock ="Left" Orientation="Vertical" Background="#ECE9D8">
             <TextBlock Margin="3"  Text="Controls"/>
+            <Button Margin="3,5" HorizontalAlignment="Left" Click="DrawSquareClick">Draw Square</Button>
             <Button Margin="3,5" HorizontalAlignment="Left" Click="b1Click">Subdivide</Button>
             <Button Margin="3,5" HorizontalAlignment="Left" Click="b2Click">Clear</Button>
             <Slider Width="100" Value="0.5" Orientation="Horizontal" ValueChanged="slider1change" HorizontalAlignment="Left"

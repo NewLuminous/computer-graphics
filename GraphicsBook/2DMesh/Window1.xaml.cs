@@ -153,6 +153,7 @@ namespace GraphicsBook
             else
             {
                 edge = new Segment(startingVertex, dot);
+                edge.Stroke = Brushes.Black;
                 gp.Children.Add(edge);
                 graph.Add(new Tuple<Dot, Dot>(startingVertex, dot), edge);
                 graph.Add(new Tuple<Dot, Dot>(dot, startingVertex), edge);

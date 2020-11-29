@@ -59,7 +59,7 @@ namespace GraphicsBook
             p.Fill = null;
         }
 
-#region Interaction handling
+        #region Interaction handling
         /// <summary>
         /// Handle clicks on the "subdivide" button. If the current polygon has been subdivided, 
         /// make the subdivided polygon the current one, and create a more finely subdivided one to be the "subdivided" 
@@ -95,12 +95,10 @@ namespace GraphicsBook
                 double x = (myPolygon.Points[lasti].X + myPolygon.Points[i].X) / 2;
                 double y = (myPolygon.Points[lasti].Y + myPolygon.Points[i].Y) / 2;
                 mySubdivPolygon.Points.Add(new Point(x, y));
-                Debug.Print(x.ToString() + " " + y.ToString());
 
                 x = alpha / 2 * myPolygon.Points[lasti].X + alpha / 2 * myPolygon.Points[nexti].X + (1 - alpha) * myPolygon.Points[i].X;
                 y = alpha / 2 * myPolygon.Points[lasti].Y + alpha / 2 * myPolygon.Points[nexti].Y + (1 - alpha) * myPolygon.Points[i].Y;
                 mySubdivPolygon.Points.Add(new Point(x, y));
-                Debug.Print(x.ToString() + " " + y.ToString());
             }
             e.Handled = true; // don't propagate the click any further
         }
@@ -133,9 +131,26 @@ namespace GraphicsBook
             
             e.Handled = true; // don't propagate the click any further
         }
-#endregion
 
-#region Menu, command, and keypress handling
+        public void DrawSquareClick(object sender, RoutedEventArgs e)
+        {
+            b2Click(sender, e);
+            if (ready)
+            {
+                if (!isSubdivided)
+                {
+                    myPolygon.Points.Add(new Point(-64, +64));
+                    myPolygon.Points.Add(new Point(+64, +64));
+                    myPolygon.Points.Add(new Point(+64, -64));
+                    myPolygon.Points.Add(new Point(-64, -64));
+                }
+            }
+
+            e.Handled = true; // don't propagate the click any further
+        }
+        #endregion
+
+        #region Menu, command, and keypress handling
 
         protected static RoutedCommand ExitCommand;
 
